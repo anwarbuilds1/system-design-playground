@@ -155,7 +155,7 @@ export default function LandingPage() {
 
               {/* Title */}
               <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight max-w-2xl leading-snug">
-                Build a URL shortener that survives{" "}
+                Build a URL shortener that survives <br />
                 <span className="bg-gradient-to-r from-rose-400 to-amber-500 bg-clip-text text-transparent filter drop-shadow-[0_2px_8px_rgba(244,63,94,0.3)]">
                   10,000 RPS.
                 </span>
