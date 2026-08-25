@@ -118,3 +118,32 @@ body {
 }
 .react-flow__handle-connecting { background: var(--accent) !important; }
 .react-flow__minimap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+
+@keyframes flow {
+  0% {
+    top: 0%;
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.8);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.1);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.1);
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.8);
+  }
+}
+
+.flow-slow {
+  animation: flow 1.2s infinite linear;
+}
+
+.flow-fast {
+  animation: flow 0.6s infinite linear;
+}

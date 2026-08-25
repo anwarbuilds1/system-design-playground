@@ -1,91 +1,173 @@
 import Link from "next/link";
-import { ArrowRight, Blocks, PlayCircle, TrendingUp, ChevronRight } from "lucide-react";
-import { HeroPreview } from "@/components/landing/HeroPreview";
+import {
+  ArrowRight,
+  TrendingUp,
+  BookOpen,
+  Cpu,
+  Play,
+  Zap,
+  Compass,
+  Sparkles,
+} from "lucide-react";
+import { HeroSection } from "@/components/landing/HeroSection";
 import { Button } from "@/components/ui/button";
 
 const LOOP = [
-  { label: "Learn", detail: "A short, concrete explanation — no walls of text." },
-  { label: "Build", detail: "Drag components onto a real canvas and connect them." },
-  { label: "Run", detail: "Simulate traffic against the architecture you built." },
-  { label: "Break", detail: "Watch bottlenecks and single points of failure surface." },
-  { label: "Understand", detail: "See exactly why, with a plain-language explanation." },
-  { label: "Improve", detail: "Fix it, run again, and watch your score climb." },
+  {
+    label: "Learn",
+    detail: "A short, concrete explanation — no walls of text.",
+    icon: BookOpen,
+    color: "text-emerald-400",
+    bgAccent: "bg-emerald-500/10 border-emerald-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(52,211,153,0.15)] group-hover:border-emerald-400/40"
+  },
+  {
+    label: "Build",
+    detail: "Drag components onto a real canvas and connect them.",
+    icon: Cpu,
+    color: "text-sky-400",
+    bgAccent: "bg-sky-500/10 border-sky-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(56,189,248,0.15)] group-hover:border-sky-400/40"
+  },
+  {
+    label: "Run",
+    detail: "Simulate traffic against the architecture you built.",
+    icon: Play,
+    color: "text-blue-400",
+    bgAccent: "bg-blue-500/10 border-blue-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] group-hover:border-blue-400/40"
+  },
+  {
+    label: "Break",
+    detail: "Watch bottlenecks and single points of failure surface.",
+    icon: Zap,
+    color: "text-rose-400",
+    bgAccent: "bg-rose-500/10 border-rose-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(244,63,94,0.15)] group-hover:border-rose-400/40"
+  },
+  {
+    label: "Understand",
+    detail: "See exactly why, with a plain-language explanation.",
+    icon: Compass,
+    color: "text-purple-400",
+    bgAccent: "bg-purple-500/10 border-purple-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] group-hover:border-purple-400/40"
+  },
+  {
+    label: "Improve",
+    detail: "Fix it, run again, and watch your score climb.",
+    icon: Sparkles,
+    color: "text-amber-400",
+    bgAccent: "bg-amber-500/10 border-amber-500/20",
+    glow: "group-hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] group-hover:border-amber-400/40"
+  },
 ];
 
 export default function LandingPage() {
   return (
     <div className="flex flex-1 flex-col">
-      <section className="relative overflow-hidden">
-        <div className="grid-fade absolute inset-0 h-[520px]" />
-        <div className="relative mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-20 text-center sm:pt-28">
-          <span className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-[12px] text-muted mono">
-            <Blocks size={12} className="text-accent" /> deterministic simulation, not a diagramming tool
-          </span>
-          <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl">
-            Learn System Design <br className="hidden sm:block" /> by Building It.
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted">
-            Build architectures, run simulations, discover bottlenecks, and understand the trade-offs behind
-            real-world systems.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/learn">
-              <Button size="lg">
-                Start Learning <ArrowRight size={15} />
-              </Button>
-            </Link>
-            <Link href="/playground">
-              <Button variant="secondary" size="lg">
-                <PlayCircle size={15} /> Open Playground
-              </Button>
-            </Link>
-          </div>
-        </div>
-        <div className="relative mx-auto max-w-4xl px-6 pb-24">
-          <HeroPreview />
-        </div>
-      </section>
+      {/* Interactive Hero Visualizer */}
+      <HeroSection />
 
-      <section className="border-t border-border bg-surface/20 px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 flex items-end justify-between">
+      {/* The Core Loop Steps */}
+      <section className="border-t border-border bg-surface/10 px-6 py-20 lg:py-28 relative">
+        <div className="absolute top-0 left-1/3 w-[300px] h-[300px] bg-accent/3 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="mx-auto max-w-7xl">
+          {/* Section Header */}
+          <div className="mb-14 flex items-end justify-between">
             <div>
-              <div className="text-[11px] uppercase tracking-wider text-accent mono">The core loop</div>
-              <h2 className="mt-1.5 text-2xl font-semibold text-foreground">Not a course. A feedback loop.</h2>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-accent mono block">
+                The Core Loop
+              </span>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
+                Not a course. A feedback loop.
+              </h2>
             </div>
-            <TrendingUp size={20} className="hidden text-muted-2 sm:block" />
+            <div className="hidden items-center gap-2 border border-border bg-surface/50 rounded-xl px-4 py-2 text-xs mono text-muted sm:flex select-none">
+              <TrendingUp size={14} className="text-accent" /> Iterative progress flow
+            </div>
           </div>
-          <div className="flex flex-col divide-y divide-border rounded-xl border border-border bg-surface/40 sm:flex-row sm:divide-x sm:divide-y-0">
-            {LOOP.map((step, idx) => (
-              <div key={step.label} className="group relative flex-1 p-5">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="mono text-[11px] text-muted-2">0{idx + 1}</span>
-                  <span className="text-[13.5px] font-medium text-foreground">{step.label}</span>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-5">
+            {LOOP.map((step, idx) => {
+              const Icon = step.icon;
+              return (
+                <div
+                  key={step.label}
+                  className={`group relative flex flex-col justify-between rounded-2xl border border-border bg-surface/20 p-5.5 transition-all duration-300 hover:-translate-y-1 ${step.glow}`}
+                >
+                  {/* Subtle Background Inner Glow */}
+                  <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-[0.03] transition-opacity duration-300 pointer-events-none bg-current ${step.color}`} />
+                  
+                  <div>
+                    {/* Header: Number & Icon */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="mono text-xs font-bold text-muted-2">0{idx + 1}</span>
+                      <div className={`h-8 w-8 rounded-lg flex items-center justify-center border transition-colors duration-300 ${step.bgAccent} ${step.color}`}>
+                        <Icon size={14} strokeWidth={2.2} />
+                      </div>
+                    </div>
+
+                    {/* Step Label */}
+                    <h3 className="text-sm font-bold tracking-tight text-foreground mb-2 group-hover:text-accent transition-colors duration-200">
+                      {step.label}
+                    </h3>
+
+                    {/* Step Detail */}
+                    <p className="text-[12.5px] leading-relaxed text-muted font-medium">
+                      {step.detail}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-[12.5px] leading-relaxed text-muted">{step.detail}</p>
-                {idx < LOOP.length - 1 && (
-                  <ChevronRight
-                    size={14}
-                    className="absolute right-[-9px] top-1/2 hidden -translate-y-1/2 text-border-strong sm:block"
-                  />
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-20">
-        <div className="mx-auto flex max-w-5xl flex-col items-center rounded-2xl border border-border bg-gradient-to-b from-surface to-surface/40 px-8 py-14 text-center">
-          <h2 className="text-2xl font-semibold text-foreground">Build a URL shortener that survives 10,000 RPS.</h2>
-          <p className="mt-3 max-w-lg text-[14px] text-muted">
-            Six lessons, one deterministic simulation engine, zero AI guessing at your architecture&apos;s physics.
-          </p>
-          <Link href="/learn/client-server-db" className="mt-7">
-            <Button size="lg">
-              Start Lesson 1 <ArrowRight size={15} />
-            </Button>
-          </Link>
+      {/* URL Shortener Challenge CTA */}
+      <section className="px-6 pb-24 relative overflow-hidden">
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] bg-emerald-500/3 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="mx-auto max-w-5xl">
+          <div className="relative overflow-hidden rounded-3xl border border-border bg-surface/25 backdrop-blur-md px-8 py-16 text-center shadow-xl">
+            {/* Tech grid inside CTA */}
+            <div className="grid-fade absolute inset-0 opacity-20 pointer-events-none" />
+            
+            {/* Soft backdrop radial blobs */}
+            <div className="absolute -top-12 -left-12 w-48 h-48 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col items-center">
+              {/* Badge */}
+              <span className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1 text-[10px] font-bold text-accent tracking-wider uppercase select-none">
+                🚀 Getting Started Lesson
+              </span>
+
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight max-w-2xl leading-snug">
+                Build a URL shortener that survives{" "}
+                <span className="bg-gradient-to-r from-rose-400 to-amber-500 bg-clip-text text-transparent filter drop-shadow-[0_2px_8px_rgba(244,63,94,0.3)]">
+                  10,000 RPS.
+                </span>
+              </h2>
+
+              {/* Description */}
+              <p className="mt-4 max-w-lg text-[13.5px] sm:text-[14px] leading-relaxed text-muted font-medium">
+                Six lessons, one deterministic simulation engine, zero AI guessing at your architecture&apos;s physics.
+              </p>
+
+              {/* Start Button */}
+              <Link href="/learn/client-server-db" className="mt-8 group">
+                <Button size="lg" className="font-bold tracking-tight hover:shadow-[0_0_20px_rgba(52,211,153,0.3)]">
+                  Start Lesson 1 
+                  <ArrowRight size={14} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
