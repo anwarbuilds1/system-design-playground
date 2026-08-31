@@ -25,8 +25,8 @@ export const LESSONS: Lesson[] = [
   {
     id: "client-server-db",
     index: 1,
-    title: "Client → Server → Database",
-    concept: "The request/response cycle",
+    title: "Web Application Basics",
+    concept: "Understand the foundation of modern web applications.",
     teaches: ["Client", "API Server", "Database", "Request/response"],
     explain:
       "Every system starts the same way: a client sends a request, a server processes it, and a database stores or retrieves the data behind it.",
@@ -48,7 +48,7 @@ export const LESSONS: Lesson[] = [
     id: "load-balancing",
     index: 2,
     title: "Load Balancing",
-    concept: "Distributing traffic across servers",
+    concept: "Distribute traffic across multiple servers.",
     teaches: ["Why one server is insufficient", "Horizontal scaling", "Load balancing"],
     explain:
       "A load balancer distributes incoming requests across multiple servers. This prevents one server from becoming overloaded.",
@@ -70,7 +70,7 @@ export const LESSONS: Lesson[] = [
     id: "caching",
     index: 3,
     title: "Caching",
-    concept: "Keeping hot data close and fast",
+    concept: "Reduce latency and database load.",
     teaches: ["Cache", "Cache hit", "Cache miss", "Redis", "Database load"],
     explain:
       "A cache keeps frequently accessed data in fast, in-memory storage so most reads never have to touch the database at all.",
@@ -93,7 +93,7 @@ export const LESSONS: Lesson[] = [
     id: "replication",
     index: 4,
     title: "Database Replication",
-    concept: "Scaling reads with replicas",
+    concept: "Scale read-heavy workloads.",
     teaches: ["Primary database", "Read replicas", "Read/write separation"],
     explain:
       "A primary database handles writes while one or more read replicas serve read traffic, spreading load across multiple database instances.",
@@ -115,8 +115,8 @@ export const LESSONS: Lesson[] = [
   {
     id: "async-processing",
     index: 5,
-    title: "Asynchronous Processing",
-    concept: "Taking slow work off the request path",
+    title: "Async Processing",
+    concept: "Move expensive work off the critical path.",
     teaches: ["Queue", "Worker", "Async processing", "Decoupling"],
     explain:
       "A queue buffers expensive work so a worker can process it in the background, keeping the API response fast.",
@@ -138,8 +138,8 @@ export const LESSONS: Lesson[] = [
   {
     id: "url-shortener",
     index: 6,
-    title: "Complete URL Shortener",
-    concept: "Combining everything you've learned",
+    title: "URL Shortener (Mini Project)",
+    concept: "Combine everything to build a real system.",
     teaches: ["Load balancing", "Caching", "Replication", "Async processing", "CDN"],
     explain:
       "A production URL shortener has to redirect at very low latency, handle far more reads than writes, and stay up. This challenge combines everything from the previous lessons.",

@@ -8,8 +8,9 @@ export interface LevelInfo {
 const LEVELS: { level: number; title: string; minXp: number }[] = [
   { level: 1, title: "System Design Beginner", minXp: 0 },
   { level: 2, title: "Backend Builder", minXp: 300 },
-  { level: 3, title: "Scalability Explorer", minXp: 800 },
-  { level: 4, title: "Distributed Systems Engineer", minXp: 1500 },
+  { level: 3, title: "Scalability Explorer", minXp: 700 },
+  { level: 4, title: "Distributed Systems Explorer", minXp: 1000 },
+  { level: 5, title: "Principal Architect", minXp: 2000 },
 ];
 
 export function getLevelInfo(xp: number): LevelInfo {
@@ -23,7 +24,7 @@ export function getLevelInfo(xp: number): LevelInfo {
     level: current.level,
     title: current.title,
     minXp: current.minXp,
-    nextLevelXp: next ? next.minXp : null,
+    nextLevelXp: next ? next.minXp : 2000,
   };
 }
 
