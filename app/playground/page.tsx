@@ -48,23 +48,41 @@ export default function PlaygroundPage() {
       awardBadge("first-architecture");
       awardBadge("first-simulation");
       if (r.bottlenecks.length === 0) awardBadge("zero-bottlenecks");
-      if (r.metrics.databaseLoadPct < 50 && builder.architecture.nodes.some((n) => n.type === "redis")) {
+      if (r.metrics.databaseLoadPct < 50 && builder.architecture.nodes.some((n) => n.type === "redis"))
         awardBadge("cache-master");
-      }
       if (builder.architecture.nodes.some((n) => n.type === "load_balancer")) awardBadge("scaling-beginner");
       if (r.score >= 90) awardBadge("architecture-optimizer");
     }
   };
 
+  /* Navbar is h-16 = 64px; toolbar row ≈ 52px total (py-2.5 top+bottom + content) */
+  const CHROME_HEIGHT = "calc(100dvh - 64px)";
+  const TOOLBAR_HEIGHT = "52px";
+
   return (
-    <div className="flex flex-1 flex-col gap-4 px-4 py-4">
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3">
+    <div className="flex flex-col" style={{ height: CHROME_HEIGHT }}>
+      {/* ── Toolbar ──────────────────────────────────────────────── */}
+      <div
+        className="shrink-0 flex flex-wrap items-center justify-between gap-3 border-b border-border/60 bg-surface/40 px-4 py-2.5 backdrop-blur-sm"
+        style={{ minHeight: TOOLBAR_HEIGHT }}
+      >
+        {/* Left actions */}
         <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" onClick={() => { builder.reset(); setResult(null); setValidation(null); }}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => { builder.reset(); setResult(null); setValidation(null); }}
+          >
             <RefreshCcw size={13} /> New Architecture
           </Button>
+
+          {/* Templates dropdown */}
           <div className="relative">
-            <Button variant="secondary" size="sm" onClick={() => setMenuOpen(menuOpen === "templates" ? null : "templates")}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setMenuOpen(menuOpen === "templates" ? null : "templates")}
+            >
               <LayoutTemplate size={13} /> Templates
             </Button>
             {menuOpen === "templates" && (
@@ -72,11 +90,7 @@ export default function PlaygroundPage() {
                 {TEMPLATES.map((t) => (
                   <button
                     key={t.id}
-                    onClick={() => {
-                      builder.loadArchitecture(t.architecture);
-                      setMenuOpen(null);
-                      setResult(null);
-                    }}
+                    onClick={() => { builder.loadArchitecture(t.architecture); setMenuOpen(null); setResult(null); }}
                     className="block w-full rounded-md px-2.5 py-2 text-left text-[13px] hover:bg-surface-2"
                   >
                     <div className="text-foreground">{t.name}</div>
@@ -86,8 +100,14 @@ export default function PlaygroundPage() {
               </div>
             )}
           </div>
+
+          {/* Load saved dropdown */}
           <div className="relative">
-            <Button variant="secondary" size="sm" onClick={() => setMenuOpen(menuOpen === "saved" ? null : "saved")}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setMenuOpen(menuOpen === "saved" ? null : "saved")}
+            >
               <FolderOpen size={13} /> Load
             </Button>
             {menuOpen === "saved" && (
@@ -98,11 +118,7 @@ export default function PlaygroundPage() {
                   saved.map((a) => (
                     <button
                       key={a.id}
-                      onClick={() => {
-                        builder.loadArchitecture(a.architecture);
-                        setMenuOpen(null);
-                        setResult(null);
-                      }}
+                      onClick={() => { builder.loadArchitecture(a.architecture); setMenuOpen(null); setResult(null); }}
                       className="block w-full truncate rounded-md px-2.5 py-2 text-left text-[13px] text-foreground hover:bg-surface-2"
                     >
                       {a.name}
@@ -112,6 +128,8 @@ export default function PlaygroundPage() {
               </div>
             )}
           </div>
+
+          {/* Name + Save */}
           <div className="flex items-center gap-1.5">
             <input
               value={nameInput}
@@ -123,16 +141,14 @@ export default function PlaygroundPage() {
               variant="secondary"
               size="sm"
               disabled={!nameInput.trim()}
-              onClick={() => {
-                save(nameInput.trim(), builder.architecture);
-                setNameInput("");
-              }}
+              onClick={() => { save(nameInput.trim(), builder.architecture); setNameInput(""); }}
             >
               <Save size={13} /> Save
             </Button>
           </div>
         </div>
 
+        {/* Right: requirements + run */}
         <div className="flex items-center gap-3">
           <RequirementField
             label="RPS"
@@ -148,20 +164,24 @@ export default function PlaygroundPage() {
         </div>
       </div>
 
-      <div className="mx-auto flex h-40 w-full max-w-6xl items-center justify-center rounded-xl border border-border bg-surface/40 px-6 text-center text-[13px] text-muted md:hidden">
-        The playground is optimized for desktop. Open this page on a larger screen to build architectures.
+      {/* Mobile warning */}
+      <div className="flex flex-1 items-center justify-center px-6 text-center text-[13px] text-muted md:hidden">
+        The playground is optimized for desktop. Open this page on a larger screen.
       </div>
-      <div className="mx-auto hidden h-[560px] w-full max-w-6xl md:block">
+
+      {/* ── Canvas — fills ALL remaining height ─────────────────── */}
+      <div className="hidden flex-1 min-h-0 flex-col p-3 md:flex">
         <ArchitectureCanvas builder={builder} availableComponents={ALL_COMPONENTS} />
       </div>
 
+      {/* Results / Validation (shrink-0 below canvas) */}
       {validation && !validation.valid && (
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="shrink-0 px-4 pb-3">
           <ValidationErrors validation={validation} />
         </div>
       )}
       {result && (
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="shrink-0 px-4 pb-4">
           <ResultsPanel result={result} requirements={requirements} />
         </div>
       )}
@@ -169,7 +189,15 @@ export default function PlaygroundPage() {
   );
 }
 
-function RequirementField({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
+function RequirementField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+}) {
   return (
     <label className="flex items-center gap-1.5 text-[12px] text-muted-2">
       {label}
