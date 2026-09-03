@@ -10,6 +10,7 @@ import Image from "next/image";
 
 const LINKS = [
   { href: "/learn", label: "Learn" },
+  { href: "/roadmap", label: "Roadmap" },
   { href: "/playground", label: "Playground" },
   { href: "/challenges", label: "Challenges" },
   { href: "/leaderboard", label: "Leaderboard" },
